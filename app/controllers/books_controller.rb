@@ -1,5 +1,13 @@
 class BooksController < ApplicationController
   def index
+    @books = Book.all
+    @book = Book.new
+  end
+
+  def create
+    book = Book.new(book_params)
+    book.save
+    redirect_to books_show_path
   end
 
   def show
@@ -7,4 +15,11 @@ class BooksController < ApplicationController
 
   def edit
   end
+
+  def book_params
+    params.require(:book).permit(:title, :body)
+  end
+
+
+
 end
